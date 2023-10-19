@@ -54,10 +54,46 @@ public static class SuperBoard
     {
         if (boards[boardNum].ValidMove(move))
         {
-            boards[boardNum].values[move = (player == 0) ? xPlayer : oPlayer];
+            boards[boardNum].values[
+                move] = ((player == 0) ? xPlayer : oPlayer);
             return true;
         }
         return false;
+    } 
+    
+    public static void DisplayBoard()
+    {
+        Console.WriteLine("");
+        // One of three biggest lines
+        for (int i1 = 0; i1 < 3; i1++)
+        {
+            // A line for a smaller Grid
+            for (int i2 = 0; i2 < 3; i2++) 
+            {
+                // One for each table so that i dont have to die
+                for (int i3 = 0; i3 < 3; i3++) 
+                {
+                    // One per value in the table
+                    for (int i4 = 0; i4 < 3; i4++) 
+                    {
+                        Console.Write(boards[i1 * 3 + i2].values[i4] + (i4 != 2 ? "|" : ""));
+                    }
+                    if (i3 == 2) 
+                    {
+                        Console.WriteLine();
+                    }
+                    else 
+                    {
+                        Console.Write("||");
+                    }
+                }
+                
+                if (i2 != 2)
+                {
+                    Console.WriteLine("-------------------");
+                }
+            }
+        }
     }
 }
 
