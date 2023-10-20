@@ -6,6 +6,13 @@ public class Program
     {
         Console.WriteLine ("Hello Mono World");
         Console.WriteLine("Welcome to Super Tic Tac Toe");
+
+        //SuperBoard.DisplayBoard();
+        Board board = new Board();
+        board.Display();
+        
+        SuperBoard.Reset();
+        SuperBoard.DisplayBoard();
         
         bool isPlaying = true;
         bool gameGoing = true;
@@ -50,6 +57,16 @@ public static class SuperBoard
     public static string xPlayer = "X";
     public static string oPlayer = "O";
     
+    static SuperBoard()
+    {
+        boards = new Board[9];
+    }
+    
+    public static void Reset()
+    {
+        boards = new Board[9];
+    }
+    
     public static bool Move(int boardNum, int move, int player)
     {
         if (boards[boardNum].ValidMove(move))
@@ -64,20 +81,36 @@ public static class SuperBoard
     public static void DisplayBoard()
     {
         Console.WriteLine("");
+        Console.WriteLine("Entered Display Board");
+
+        if (boards != null)
+        {
+            Console.WriteLine("Boards not empty");
+        }
+        string? num = boards[0].values[0];
+        Console.WriteLine("Passed Check 1");
+        boards[0].Display();
+        
         // One of three biggest lines
         for (int i1 = 0; i1 < 3; i1++)
         {
+            Console.WriteLine("Loop 1, Iteration " + i1);
             // A line for a smaller Grid
             for (int i2 = 0; i2 < 3; i2++) 
             {
+                Console.WriteLine("Loop 2, Iteration " + i2);
                 // One for each table so that i dont have to die
                 for (int i3 = 0; i3 < 3; i3++) 
                 {
+                    Console.WriteLine("Loop 3, Iteration " + i3);
                     // One per value in the table
                     for (int i4 = 0; i4 < 3; i4++) 
                     {
+                        Console.WriteLine("Loop 4, Iteration " + i4);
                         Console.Write(boards[i1 * 3 + i2].values[i4] + (i4 != 2 ? "|" : ""));
                     }
+                    
+                    Console.WriteLine("Loop 3, Passed i4 Loop");
                     if (i3 == 2) 
                     {
                         Console.WriteLine();
@@ -124,11 +157,23 @@ public class Board
     public void Display()
     {
         Console.WriteLine();
-        Console.WriteLine(values[0] + "|" + values[1] + "|" + values[2]);
+        try {
+            Console.WriteLine(this.values[0] + "|" + this.values[1] + "|" + this.values[2]);
+        } catch (Exception e) {
+            Console.WriteLine(e);
+        }
         Console.WriteLine("-----");
-        Console.WriteLine(values[3] + "|" + values[4] + "|" + values[5]);
+        try {
+            Console.WriteLine(this.values[3] + "|" + this.values[4] + "|" + this.values[5]);
+        } catch (Exception e) {
+            Console.WriteLine(e);
+        }
         Console.WriteLine("-----");
-        Console.WriteLine(values[6] + "|" + values[7] + "|" + values[8]);
+        try {
+            Console.WriteLine(this.values[6] + "|" + this.values[7] + "|" + this.values[8]);
+        } catch (Exception e) {
+            Console.WriteLine(e);
+        }
         Console.WriteLine();
     }
     
